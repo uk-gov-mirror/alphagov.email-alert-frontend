@@ -17,4 +17,6 @@ RUN bundle install
 
 ADD . $APP_HOME
 
+HEALTHCHECK CMD curl --silent --fail localhost:$PORT/healthcheck || exit 1
+
 CMD bundle exec foreman run web
