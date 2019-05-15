@@ -79,16 +79,41 @@ class SubscriptionsManagementController < ApplicationController
 private
 
   def get_subscription_details
-    subscription_details = email_alert_api.get_subscriptions(
-      id: authenticated_subscriber_id
-    )
+    #----------------- TEMPORARY FIXTURE DATA
 
-    @subscriber = subscription_details['subscriber']
-    @subscriptions = {}
+    @subscriptions = {
+      'abc' => {
+        # params taken from gds-api-adapters/lib/email_alert_api.rb `get_subscription` method
+        'id' => 'foo',
+        'subscriber_list' => {
+          'title' => 'the foo subscription'
+        },
+        'subscriber' => 'foo',
+        'created_at' => 'foo',
+        'updated_at' => 'foo',
+        'ended_at' => 'foo',
+        'ended_reason' => 'foo',
+        'source' => 'foo',
+        'frequency' => 'daily',
+      }
+    }
 
-    subscription_details['subscriptions'].each do |subscription|
-      @subscriptions[subscription['id']] = subscription
-    end
+    @subscriber = {
+      'address' => 'abc@example.com',
+    }
+
+    #----------------- ORIGINAL CODE BELOW
+
+    # subscription_details = email_alert_api.get_subscriptions(
+    #   id: authenticated_subscriber_id
+    # )
+
+    # @subscriber = subscription_details['subscriber']
+    # @subscriptions = {}
+
+    # subscription_details['subscriptions'].each do |subscription|
+    #   @subscriptions[subscription['id']] = subscription
+    # end
   end
 
   def set_back_url

@@ -26,7 +26,7 @@ private
   end
 
   def require_authentication
-    redirect_to :sign_in unless authenticated?
+    #redirect_to :sign_in unless authenticated?
   end
 
   def authenticated?
