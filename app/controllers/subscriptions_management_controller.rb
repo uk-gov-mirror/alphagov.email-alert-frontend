@@ -79,6 +79,23 @@ class SubscriptionsManagementController < ApplicationController
 private
 
   def get_subscription_details
+    # Looks like we can hide the complexity of a 'curated subscription' from the user.
+    # Shouldn't require any changes to the email-alert-frontend.
+    # This method calls `email_alert_api.get_subscriptions(id)` with the ID of the user.
+    # This calls alphagov/gds-api-adapters/lib/email_alert_api.rb
+    # That method calls the REST API: `get_json("#{endpoint}/subscribers/#{id}/subscriptions")`
+    # ...which finally takes us into the `alphagov/email-alert-api` repo.
+
+    # Looking at routes.rb, that endpoint is handled by `SubscribersController`
+    # (`get "/subscribers/:id/subscriptions", to: "subscribers#subscriptions"`)
+    # So we look at the `subscriptions` method of that controller.
+    # That method looks for subscriptions by that subscriber (e.g. abc@example.com)
+    # to that mailing list (`:subscriber_list`).
+
+    # So long as our implementation of `subscriber_list` is interchangeable with the current
+    # 'individual subscription' implementation, it shouldn't matter whether a subscription
+    # is an individual subscription or a curated one.
+
     #----------------- TEMPORARY FIXTURE DATA
 
     @subscriptions = {
