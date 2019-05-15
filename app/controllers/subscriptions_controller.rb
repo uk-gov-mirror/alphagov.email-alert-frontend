@@ -43,6 +43,9 @@ private
 
   def assign_attributes
     @topic_id = subscription_params.require(:topic_id)
+    # We're going to pass the topic_id to email_alert_api which return a single
+    # subscriber list if there is just one id, otherwise, it'll return an OrJoinedSubscriberList
+    # which will respond exactly as if it's a single subscriber list
     @subscriber_list = email_alert_api
       .get_subscriber_list(slug: @topic_id)
       .to_h.fetch("subscriber_list")
@@ -85,8 +88,15 @@ private
   end
 
   def subscribe
+    # NB: This will require a change in GDS API adaptors to support `subscriber_list_slug`
+    # This is so we can continue to support subscribing via `subscriber_list_id`
+    # In email alert api we will use the slug to try and find the subscriber list and
+    # and if that parameter isn't included use the id instead.
+    #
+    # In time we can remove `subscriber_list_id` in favour of the slug
     email_alert_api.subscribe(
       subscriber_list_id: @subscriber_list["id"],
+      subscriber_list_slug: @subscriber_list["slug"],
       address: @address,
       frequency: @frequency,
     )
