@@ -22,6 +22,7 @@ namespace :publishing_api do
       description: "",
       base_path: "/email-signup",
       type: "exact",
+      http_methods: %w(GET POST),
       publishing_app: "email-alert-frontend",
       rendering_app: "email-alert-frontend"
     )
@@ -57,6 +58,7 @@ namespace :publishing_api do
       description: "Prefix route to allow users to unsubscribe from emails",
       base_path: "/email/unsubscribe",
       type: "prefix",
+      http_methods: %w(GET POST),
       publishing_app: "email-alert-frontend",
       rendering_app: "email-alert-frontend"
     )
@@ -82,6 +84,7 @@ namespace :publishing_api do
       description: "Prefix route to allow users to create email subscriptions",
       base_path: "/email/subscriptions",
       type: "prefix",
+      http_methods: %w(GET POST),
       publishing_app: "email-alert-frontend",
       rendering_app: "email-alert-frontend"
     )
@@ -132,6 +135,7 @@ namespace :publishing_api do
       description: "Prefix route to allow email subscription management",
       base_path: "/email/manage",
       type: "prefix",
+      http_methods: %w(GET POST),
       publishing_app: "email-alert-frontend",
       rendering_app: "email-alert-frontend"
     )
