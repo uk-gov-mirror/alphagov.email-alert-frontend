@@ -10,7 +10,7 @@ gem "govuk_publishing_components", "~> 21.44.0"
 gem "jwt", "~> 2.2"
 gem "plek", "~> 3.0"
 gem "sass-rails", "~> 5.0"
-gem "slimmer", "~> 13.4.0"
+gem "slimmer", git: "https://github.com/alphagov/slimmer.git"
 gem "uglifier", "~> 4.2"
 
 group :development, :test do
