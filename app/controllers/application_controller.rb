@@ -28,7 +28,7 @@ private
 
   def invalid_token
     reset_session
-    head :unprocessable_entity
+    head :internal_server_error
   end
 
   def error_not_found

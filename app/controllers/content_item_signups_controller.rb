@@ -10,13 +10,14 @@ class ContentItemSignupsController < ApplicationController
   helper_method :weekly_email_volume_estimate
 
   def new
-    @subscription = ContentItemSubscriptionPresenter.new(@content_item)
+    head :internal_server_error
+    #@subscription = ContentItemSubscriptionPresenter.new(@content_item)
 
-    if @subscription.child_taxons.present?
-      render "new"
-    else
-      render "confirm"
-    end
+    #if @subscription.child_taxons.present?
+      #render "new"
+    #else
+      #render "confirm"
+    #end
   end
 
   def confirm
