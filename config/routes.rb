@@ -26,6 +26,9 @@ Rails.application.routes.draw do
       get "/authenticate" => "subscriber_authentication#sign_in", as: :sign_in
       post "/authenticate" => "subscriber_authentication#request_sign_in_token", as: :request_sign_in_token
       get "/authenticate/process" => "subscriber_authentication#process_sign_in_token", as: :process_sign_in_token
+
+      get "/authenticate/oidc" => "subscriber_authentication#request_sign_in_oidc", as: :request_sign_in_oidc
+      get "/authenticate/oidc/process" => "subscriber_authentication#process_sign_in_oidc", as: :process_sign_in_oidc
     end
 
     scope "/subscriptions" do

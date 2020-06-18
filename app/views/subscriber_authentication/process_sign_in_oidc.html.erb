@@ -1,0 +1,15 @@
+<% content_for :title, t("subscriber_authentication.request_sign_in_oidc.#{@state}.heading") %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-l"><%= t("subscriber_authentication.request_sign_in_oidc.#{@state}.heading") %></h1>
+
+    <p class="govuk-body"><%= t("subscriber_authentication.request_sign_in_oidc.#{@state}.message") %></p>
+    <% if @state == :confirm %>
+      <p class="govuk-body"><a class="govuk-link" href="<%= @account_manager %>/verify/send?user_id=<%= sanitize(@user_id) %>"><%= t("subscriber_authentication.request_sign_in_oidc.confirm.prompt") %></a></p>
+      <p class="govuk-body"><%= t("subscriber_authentication.request_sign_in_oidc.confirm.delay_warning") %></p>
+    <% else %>
+      <p class="govuk-body"><a class="govuk-link" href="/email/manage/authenticate"><%= t("subscriber_authentication.request_sign_in_oidc.#{@state}.prompt") %></a></p>
+    <% end %>
+  </div>
+</div>
