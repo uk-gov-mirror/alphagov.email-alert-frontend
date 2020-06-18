@@ -6,6 +6,7 @@ en:
       action: We’ll send you an email with a link in to manage your subscriptions.
       email_input:
         label: Your email address
+      with_govuk_account: Or sign in with your GOV.UK Account.
       missing_email: "Enter your email address"
       invalid_email: "This does not look like a valid email address – check you’ve entered it correctly"
       email_error:
@@ -19,3 +20,17 @@ en:
       confirmation: "We’ve sent an email to %{address}."
       prompt: Click the link in the email to manage your subscriptions.
       delay_warning: It can take up to 15 minutes for the email to arrive.
+    request_sign_in_oidc:
+      confirm:
+        heading: Confirm your email address
+        message: You must confirm your email address to manage your subscriptions.
+        prompt: Click here to send a new confirmation email.
+        delay_warning: It can take up to 15 minutes for the email to arrive.
+      missing:
+        heading: You have no subscriptions
+        message: This email address has no associated email subscriptions.
+        prompt: Click here to use a different email address.
+      forbidden:
+        heading: An error occurred
+        message: Logging in to manage your email subscriptions failed.
+        prompt: Click here to try again.

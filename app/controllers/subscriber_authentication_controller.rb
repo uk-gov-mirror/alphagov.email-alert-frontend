@@ -38,6 +38,37 @@ class SubscriberAuthenticationController < ApplicationController
     redirect_to destination
   end
 
+  def request_sign_in_oidc
+    response = email_alert_api.get_oidc_url(
+      destination: process_sign_in_oidc_path,
+    )
+
+    redirect_to response["auth_uri"]
+  end
+
+  def process_sign_in_oidc
+    response = email_alert_api.verify_oidc_response(
+      code: params.require(:code),
+      nonce: params.require(:state),
+      destination: process_sign_in_oidc_path,
+    )
+
+    if response["subscriber"]
+      authenticate_subscriber(response["subscriber"]["id"])
+      redirect_to list_subscriptions_path
+    else
+      @state = :confirm
+      @account_manager = Plek.find("account-manager")
+      @user_id = response["user_id"]
+    end
+  rescue GdsApi::HTTPNotFound
+    # user isn't subscribed, but they've managed to log in.
+    @state = :missing
+  rescue GdsApi::HTTPForbidden
+    # the auth code is invalid, this can happen if a URL gets re-used
+    @state = :forbidden
+  end
+
 private
 
   def token
