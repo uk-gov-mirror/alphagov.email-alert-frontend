@@ -1,4 +1,4 @@
-require "gds_api/publishing_api_v2"
+require "gds_api/publishing_api"
 require "gds_api/publishing_api/special_route_publisher"
 
 namespace :publishing_api do
@@ -6,7 +6,7 @@ namespace :publishing_api do
   task publish_email_signup_page: :environment do
     logger = Logger.new(STDOUT)
 
-    publishing_api = GdsApi::PublishingApiV2.new(
+    publishing_api = GdsApi::PublishingApi.new(
       Plek.new.find("publishing-api"),
       bearer_token: ENV["PUBLISHING_API_BEARER_TOKEN"] || "example",
     )
@@ -41,7 +41,7 @@ namespace :publishing_api do
   task publish_email_unsubscribe_prefix: :environment do
     logger = Logger.new(STDOUT)
 
-    publishing_api = GdsApi::PublishingApiV2.new(
+    publishing_api = GdsApi::PublishingApi.new(
       Plek.new.find("publishing-api"),
       bearer_token: ENV["PUBLISHING_API_BEARER_TOKEN"] || "example",
     )
@@ -66,7 +66,7 @@ namespace :publishing_api do
   task publish_email_subscriptions_prefix: :environment do
     logger = Logger.new(STDOUT)
 
-    publishing_api = GdsApi::PublishingApiV2.new(
+    publishing_api = GdsApi::PublishingApi.new(
       Plek.new.find("publishing-api"),
       bearer_token: ENV["PUBLISHING_API_BEARER_TOKEN"] || "example",
     )
@@ -91,7 +91,7 @@ namespace :publishing_api do
   task publish_email_authenticate_prefix: :environment do
     logger = Logger.new(STDOUT)
 
-    publishing_api = GdsApi::PublishingApiV2.new(
+    publishing_api = GdsApi::PublishingApi.new(
       Plek.new.find("publishing-api"),
       bearer_token: ENV["PUBLISHING_API_BEARER_TOKEN"] || "example",
     )
@@ -116,7 +116,7 @@ namespace :publishing_api do
   task publish_email_manage_prefix: :environment do
     logger = Logger.new(STDOUT)
 
-    publishing_api = GdsApi::PublishingApiV2.new(
+    publishing_api = GdsApi::PublishingApi.new(
       Plek.new.find("publishing-api"),
       bearer_token: ENV["PUBLISHING_API_BEARER_TOKEN"] || "example",
     )
