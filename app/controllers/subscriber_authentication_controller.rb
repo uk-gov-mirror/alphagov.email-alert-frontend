@@ -58,7 +58,7 @@ class SubscriberAuthenticationController < ApplicationController
       redirect_to list_subscriptions_path
     else
       @state = :confirm
-      @account_manager = Plek.find("account-manager")
+      @account_manager = "https://govuk-account-manager.cloudapps.digital" # Plek.find("account-manager")
       @user_id = response["user_id"]
     end
   rescue GdsApi::HTTPNotFound
