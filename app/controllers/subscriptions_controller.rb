@@ -48,6 +48,8 @@ class SubscriptionsController < ApplicationController
                           end
       render :new_address
     end
+
+    reset_session
   end
 
 private
