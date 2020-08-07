@@ -33,7 +33,7 @@ class SubscriberAuthenticationController < ApplicationController
   end
 
   def request_sign_in_oidc
-    response = email_alert_api.get_oidc_url(
+    response = GdsApi.email_alert_api.get_oidc_url(
       destination: process_sign_in_oidc_path,
     )
 
@@ -41,11 +41,13 @@ class SubscriberAuthenticationController < ApplicationController
   end
 
   def process_sign_in_oidc
-    response = email_alert_api.verify_oidc_response(
+    response = GdsApi.email_alert_api.verify_oidc_response(
       code: params.require(:code),
       nonce: params.require(:state),
       destination: process_sign_in_oidc_path,
     )
+
+    session["bits"] = { "old" => response["bits"][0], "new" => response["bits"][1] }.compact if response["bits"]
 
     if response["subscriber"]
       authenticate_subscriber(response["subscriber"]["id"])

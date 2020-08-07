@@ -22,6 +22,12 @@
 
     <hr class="govuk-section-break govuk-section-break--l">
 
+    <% if session["bits"] %>
+      <p class="govuk-body">
+        The magic number for your account was <%= session["bits"]["old"] || "nothing" %>, and is now <%= session["bits"]["new"] || "nothing" %>!
+      </p>
+    <% end %>
+
     <% if @subscriptions.empty? %>
       <p class="govuk-body">
         You aren’t subscribed to any topics on GOV.UK.
